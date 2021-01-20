@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import React,{ useEffect, useState } from 'react';
 import Tmdb from './tmdb'
 import MovieRow from "./components/MovieRow";
@@ -6,7 +7,6 @@ import FeaturedMovie from "./components/FeaturedMovie"
 
 export default () =>
 {
-
   const [moveList, setMovieList] = useState([])
   const [feactureData, setFeactureData] = useState(null)
 
