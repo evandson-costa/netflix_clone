@@ -10,7 +10,6 @@ export default () =>
   const [moveList, setMovieList] = useState([])
   const [feactureData, setFeactureData] = useState(null)
 
-
   useEffect(() => {
     const loadAll = async () => {
       //Pegando a lista total
