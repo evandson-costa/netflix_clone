@@ -10,7 +10,11 @@ export default ({item}) => {
     for (let i in item.genres) {
         genres.push(item.genres[i].name)
     }
-// foi alterado
+
+    let description = item.overview.length > 210 
+        ?`${item.overview.substr(0, 210)}...` 
+        : item.overview  ;
+ 
     return (        
             <section className="featured" style={{
                 backgroundSize: 'cover',
@@ -26,7 +30,7 @@ export default ({item}) => {
                             <div className="featured--seasons">{item.number_of_seasons}
                              {item.number_of_seasons === 1 ? '° temporada' : '° temporadas'}</div>
                         </div>
-                        <div className="featured--description">{item.overview}</div>
+                        <div className="featured--description">{description}</div>
                         <div className="featured--buttons">
                             <a className="featured--watchButton" href={`/list/watch/${item.id}`}>▶️ Assistir</a>
                             <a className="featured--mylistButton" href={`/list/add/${item.id}`}>➕ Minha Lista</a>

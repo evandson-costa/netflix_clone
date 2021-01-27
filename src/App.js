@@ -4,11 +4,13 @@ import Tmdb from './tmdb'
 import MovieRow from "./components/MovieRow";
 import '../src/App.css'
 import FeaturedMovie from "./components/FeaturedMovie"
+import Header from "./components/Header" 
 
 export default () =>
 {
   const [moveList, setMovieList] = useState([])
   const [feactureData, setFeactureData] = useState(null)
+  const [blackHeader, setblackHeader]= useState(true)
 
   useEffect(() => {
     const loadAll = async () => {
@@ -28,8 +30,28 @@ export default () =>
     loadAll()
   }, [])
 
+  useEffect(() => {
+    const scrollListener = () =>{
+      if(window.scrollY > 10){
+        setblackHeader(true);
+      }else{
+        setblackHeader(false);
+      }
+  }
+
+  window.addEventListener('scroll', scrollListener);
+
+  return () =>{
+    window.removeEventListener('scroll', scrollListener);
+  }
+
+
+
+  }, [])
+
   return (
     <div className="page">
+      <Header black= {blackHeader} />
       {
         feactureData &&
         <FeaturedMovie item = {feactureData} />
@@ -45,6 +67,18 @@ export default () =>
           ))
         }
       </div>
+      <footer>
+        Feito com <span role="img" aria-label="coração">❤️</span> pela B7Web <br />
+        Direitos de imagens para Netflix <br />
+        Dados pegos do site <a href="https://www.themoviedb.org/">TMDB.org</a>
+      </footer>
+
+      { moveList.length<=0 &&
+        <div className="loading">
+          <img src="https://i.gifer.com/8Etj.gif" alt="Loading"/>
+        </div>
+      }
+      
     </div>
   )
 }
